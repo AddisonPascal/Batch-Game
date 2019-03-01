@@ -865,7 +865,7 @@ echo ^| !px1,y1! !px2,y1! !px3,y1! !px4,y1! !px5,y1! !px6,y1! !px7,y1! !px8,y1! 
 echo PlayerX=%playerX%
 echo PlayerY=%playerY%
 echo Points: %points%
-choice /c wasd >nul
+choice /c wasdt >nul
 echo Loading...
 :: Builds space where player was
 set /a writeX=%playerX%-1
@@ -907,6 +907,12 @@ if %errorlevel%==1 set /a playerY=%playerY%+1
 if %errorlevel%==3 set /a playerY=%playerY%-1
 if %errorlevel%==2 set /a playerX=%playerX%-1
 if %errorlevel%==4 set /a playerX=%playerX%+1
+if %errorlevel%==5 (
+set /p cont="Teleport to X: "
+set /p cont2="Teleport to Y: "
+set playerX=!cont!
+set playerY=!cont2!
+)
 set /a writeX=%playerX%+1
 set /a writeY=%playerY%+1
 if "!x%writeX%,y%writeY%!"=="$" set /a points=%points%+1
