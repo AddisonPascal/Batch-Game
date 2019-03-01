@@ -865,7 +865,7 @@ echo ^| !px1,y1! !px2,y1! !px3,y1! !px4,y1! !px5,y1! !px6,y1! !px7,y1! !px8,y1! 
 echo PlayerX=%playerX%
 echo PlayerY=%playerY%
 echo Points: %points%
-choice /c wasdt >nul
+choice /c wasdtn /t 5 /d n >nul
 echo Loading...
 :: Builds space where player was
 set /a writeX=%playerX%-1
