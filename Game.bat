@@ -558,6 +558,7 @@ set /a writeX=%playerX%+5
 if "!x%writeX%,y%writeY%!"=="" set x%writeX%,y%writeY%=%seenChar%
 :: Builds player
 set x%playerX%,y%playerY%=!name:~0,1!
+call :savePlayer
 set /a writeX=%playerX%-1
 set /a writeY=%playerY%+1
 set x%writeX%,y%writeY%=+
@@ -981,3 +982,6 @@ exit/b
 :savePlus
 echo set x%writeX%,y%writeY%=+>%GameData%\x%writeX%^,y%writeY%.bat
 exit/b
+:savePlayer
+echo set x%playerX%,y%playerY%=!name:~0,1!>%GameData%\x%playerX%^,y%playerY%.bat
+exit /b
