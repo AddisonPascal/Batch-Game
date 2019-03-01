@@ -9,6 +9,7 @@ start tmp_max.bat&exit
 del tmp_max.bat
 set GameData=GameData
 md %GameData%
+set tracking=false
 set seenChar=.
 set name=tmp_undefined
 setlocal enabledelayedexpansion
@@ -851,7 +852,25 @@ set /a writeX=%playerX%+4
 set px9,y10=!x%writeX%,y%writeY%!
 set /a writeX=%playerX%+5
 set px10,y10=!x%writeX%,y%writeY%!
+set oldPX=%playerX%
+set oldPY=%playerY%
+set oldPt=%points%
+set playerX=NUL
+set playerY=NUL
+set points=NUL
+call "%GameData%\user%tracking%.bat"
+set trackedPX=%playerX%
+set trackedPY=%playerY%
+set trackedPt=%points%
+set playerX=%oldPX%
+set playerY=%oldPY%
+set points=%oldPt%
 cls
+echo. 
+echo Press P to track another player.
+echo Tracking: %tracking%
+echo %tracking% X=%trackedPX%, Y=%trackedPY%
+echo %tracking% has %trackedPt% points.
 echo _______________________
 echo ^| !px1,y10! !px2,y10! !px3,y10! !px4,y10! !px5,y10! !px6,y10! !px7,y10! !px8,y10! !px9,y10! !px10,y10! ^|
 echo ^| !px1,y9! !px2,y9! !px3,y9! !px4,y9! !px5,y9! !px6,y9! !px7,y9! !px8,y9! !px9,y9! !px10,y9! ^|
@@ -863,11 +882,11 @@ echo ^| !px1,y4! !px2,y4! !px3,y4! !px4,y4! !px5,y4! !px6,y4! !px7,y4! !px8,y4! 
 echo ^| !px1,y3! !px2,y3! !px3,y3! !px4,y3! !px5,y3! !px6,y3! !px7,y3! !px8,y3! !px9,y3! !px10,y3! ^|
 echo ^| !px1,y2! !px2,y2! !px3,y2! !px4,y2! !px5,y2! !px6,y2! !px7,y2! !px8,y2! !px9,y2! !px10,y2! ^|
 echo ^| !px1,y1! !px2,y1! !px3,y1! !px4,y1! !px5,y1! !px6,y1! !px7,y1! !px8,y1! !px9,y1! !px10,y1! ^|
-echo PlayerX=%playerX%
-echo PlayerY=%playerY%
 echo Points: %points%
-choice /c wasdtn /t 5 /d n >nul
+echo Player coordinates: (x=%playerX%, y=%playerY%)
+choice /c wasdtnp /t 5 /d n >nul
 echo Loading...
+if %errorlevel%==6 goto update
 :: Builds space where player was
 set /a writeX=%playerX%-1
 set /a writeY=%playerY%+1
@@ -913,6 +932,9 @@ set /p cont="Teleport to X: "
 set /p cont2="Teleport to Y: "
 set playerX=!cont!
 set playerY=!cont2!
+)
+if %errorlevel%==7 (
+set /p tracking="Track: "
 )
 set /a writeX=%playerX%+1
 set /a writeY=%playerY%+1
