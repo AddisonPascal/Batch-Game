@@ -976,8 +976,10 @@ set move=right
 if %errorlevel%==5 (
 set /p cont="Teleport to X: "
 set /p cont2="Teleport to Y: "
-set playerX=!cont!
-set playerY=!cont2!
+set /a tpX=!cont!/2
+set /a tpY=!cont2!/2
+set playerX=!tpX!
+set playerY=!tpY!
 )
 if %errorlevel%==7 (
 set /p tracking="Track: "
