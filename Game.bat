@@ -8,6 +8,7 @@ start tmp_max.bat&exit
 :start
 del tmp_max.bat
 set GameData=GameData
+color 0f
 md %GameData%
 set tracking=spawn
 set seenChar=.
@@ -1069,6 +1070,8 @@ echo Tracking: %tracking%
 echo %tracking% X=%trackedPX%, Y=%trackedPY%
 echo %tracking% has %trackedPt% points.
 echo You are %Dist% blocks away from %tracking%.
+echo. 
+echo Loading...
 exit /b
 
 :left
@@ -1094,4 +1097,6 @@ echo Tracking: %tracking%
 echo %tracking% X=%trackedPX%, Y=%trackedPY%
 echo %tracking% has %trackedPt% points.
 echo You are %Dist% blocks away from %tracking%.
+echo.
+echo Loading...
 exit /b
