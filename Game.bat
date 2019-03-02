@@ -902,14 +902,19 @@ echo ^|                                ^|
 echo ^|  !px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !px8,y1!  !px9,y1!  !px10,y1!  ^|
 echo ^|________________________________^|
 echo Points: %points%
-echo Player coordinates: (x=%playerX%, y=%playerY%)
+set /a dX=%playerX%*2
+set /a dY=%playerY%*2
+echo Player coordinates: (x=%dX%, y=%dY%)
 echo. 
 echo. 
 echo Press P to track another player.
 echo Tracking: %tracking%
-echo %tracking% X=%trackedPX%, Y=%trackedPY%
+set /a dtX=%trackedPX%*2
+set /a dtY=%trackedPY%*2
+set /a dD=%Dist%*2
+echo %tracking% X=%dtX%, Y=%dtY%
 echo %tracking% has %trackedPt% points.
-echo You are %Dist% blocks away from %tracking%.
+echo You are %dD% blocks away from %tracking%.
 ::powershell $Hypotenuse = [math]::Sqrt(%AddedSidesSquared%); $ActDist = [math]::Round($Hypotenuse, 2); Write-Host "'You are'$ActDist' meters away from %tracking%. '" -NoNewLine
 echo. 
 choice /c wasdtnp /t 5 /d n >nul
@@ -1078,14 +1083,15 @@ echo ^|  !px1,y2!  !px2,y2!  !px3,y2!  !px4,y2!  !px5,y2!  !px6,y2!  !px7,y2!  !
 echo ^|                                ^|
 echo ^|  !px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !px8,y1!  !px9,y1!  !px10,y1!  ^|
 echo Points: %points%
-echo Player coordinates: (x=%playerX%, y=%playerY%)
+set /a dY=%dY%+1
+echo Player coordinates: (x=%dX%, y=%dY%)
 echo. 
 echo. 
 echo Press P to track another player.
 echo Tracking: %tracking%
-echo %tracking% X=%trackedPX%, Y=%trackedPY%
+echo %tracking% X=%dtX%, Y=%dtY%
 echo %tracking% has %trackedPt% points.
-echo You are %Dist% blocks away from %tracking%.
+echo You are %dD% blocks away from %tracking%.
 echo. 
 echo Loading...
 exit/b
@@ -1116,14 +1122,15 @@ echo ^|  !px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !
 echo ^|                                ^|
 echo ^|________________________________^|
 echo Points: %points%
-echo Player coordinates: (x=%playerX%, y=%playerY%)
+set /a dY=%dY%-1
+echo Player coordinates: (x=%dX%, y=%dY%)
 echo. 
 echo. 
 echo Press P to track another player.
 echo Tracking: %tracking%
-echo %tracking% X=%trackedPX%, Y=%trackedPY%
+echo %tracking% X=%dtX%, Y=%dtY%
 echo %tracking% has %trackedPt% points.
-echo You are %Dist% blocks away from %tracking%.
+echo You are %dD% blocks away from %tracking%.
 echo. 
 echo Loading...
 exit/b
@@ -1154,17 +1161,18 @@ echo ^|                                ^|
 echo ^|!px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !px8,y1!  !px9,y1!  !px10,y1!    ^|
 echo ^|________________________________^|
 echo Points: %points%
-echo Player coordinates: (x=%playerX%, y=%playerY%)
+set /a dX=%dX%+1
+echo Player coordinates: (x=%dX%, y=%dY%)
 echo. 
 echo. 
 echo Press P to track another player.
 echo Tracking: %tracking%
-echo %tracking% X=%trackedPX%, Y=%trackedPY%
+echo %tracking% X=%dtX%, Y=%dtY%
 echo %tracking% has %trackedPt% points.
-echo You are %Dist% blocks away from %tracking%.
+echo You are %dD% blocks away from %tracking%.
 echo. 
 echo Loading...
-exit /b
+exit/b
 
 :left
 cls
@@ -1192,14 +1200,15 @@ echo ^|                                ^|
 echo ^|    !px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !px8,y1!  !px9,y1!  !px10,y1!^|
 echo ^|________________________________^|
 echo Points: %points%
-echo Player coordinates: (x=%playerX%, y=%playerY%)
+set /a dX=%dX%-1
+echo Player coordinates: (x=%dX%, y=%dY%)
 echo. 
 echo. 
 echo Press P to track another player.
 echo Tracking: %tracking%
-echo %tracking% X=%trackedPX%, Y=%trackedPY%
+echo %tracking% X=%dtX%, Y=%dtY%
 echo %tracking% has %trackedPt% points.
-echo You are %Dist% blocks away from %tracking%.
+echo You are %dD% blocks away from %tracking%.
 echo. 
 echo Loading...
-exit /b
+exit/b
