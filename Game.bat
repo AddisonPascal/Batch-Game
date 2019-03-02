@@ -9,7 +9,7 @@ start tmp_max.bat&exit
 del tmp_max.bat
 set GameData=GameData
 md %GameData%
-set tracking=false
+set tracking=spawn
 set seenChar=.
 set name=tmp_undefined
 setlocal enabledelayedexpansion
@@ -855,9 +855,9 @@ set px10,y10=!x%writeX%,y%writeY%!
 set oldPX=%playerX%
 set oldPY=%playerY%
 set oldPt=%points%
-set playerX=NUL
-set playerY=NUL
-set points=NUL
+set playerX=0
+set playerY=0
+set points=0
 call "%GameData%\user%tracking%.bat"
 set trackedPX=%playerX%
 set trackedPY=%playerY%
@@ -865,12 +865,18 @@ set trackedPt=%points%
 set playerX=%oldPX%
 set playerY=%oldPY%
 set points=%oldPt%
+set /a signed_XDist=%trackedPX%-%playerX%
+set XDist=%signed_XDist%
+if "%XDist:~0,1%"=="-" set XDist=%XDist:~1%
+set /a signed_YDist=%trackedPY%-%playerY%
+set YDist=%signed_YDist%
+if "%YDist:~0,1%"=="-" set YDist=%YDist:~1%
+set /a Dist=%XDist%+%YDist%
+::set /a SideXSquared=%XDist%*%XDist%
+::set /a SideYSquared=%YDist%*%YDist%
+::set /a AddedSidesSquared=%SideXSquared%+%SideYSquared%
 cls
 echo. 
-echo Press P to track another player.
-echo Tracking: %tracking%
-echo %tracking% X=%trackedPX%, Y=%trackedPY%
-echo %tracking% has %trackedPt% points.
 echo _______________________
 echo ^| !px1,y10! !px2,y10! !px3,y10! !px4,y10! !px5,y10! !px6,y10! !px7,y10! !px8,y10! !px9,y10! !px10,y10! ^|
 echo ^| !px1,y9! !px2,y9! !px3,y9! !px4,y9! !px5,y9! !px6,y9! !px7,y9! !px8,y9! !px9,y9! !px10,y9! ^|
@@ -884,6 +890,15 @@ echo ^| !px1,y2! !px2,y2! !px3,y2! !px4,y2! !px5,y2! !px6,y2! !px7,y2! !px8,y2! 
 echo ^| !px1,y1! !px2,y1! !px3,y1! !px4,y1! !px5,y1! !px6,y1! !px7,y1! !px8,y1! !px9,y1! !px10,y1! ^|
 echo Points: %points%
 echo Player coordinates: (x=%playerX%, y=%playerY%)
+echo. 
+echo. 
+echo Press P to track another player.
+echo Tracking: %tracking%
+echo %tracking% X=%trackedPX%, Y=%trackedPY%
+echo %tracking% has %trackedPt% points.
+echo You are %Dist% blocks away from %tracking%.
+::powershell $Hypotenuse = [math]::Sqrt(%AddedSidesSquared%); $ActDist = [math]::Round($Hypotenuse, 2); Write-Host "'You are'$ActDist' meters away from %tracking%. '" -NoNewLine
+echo. 
 choice /c wasdtnp /t 5 /d n >nul
 echo Loading...
 if %errorlevel%==6 goto update
