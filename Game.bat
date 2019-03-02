@@ -879,17 +879,28 @@ set /a Dist=%XDist%+%YDist%
 ::set /a AddedSidesSquared=%SideXSquared%+%SideYSquared%
 cls
 echo. 
-echo _______________________
-echo ^| !px1,y10! !px2,y10! !px3,y10! !px4,y10! !px5,y10! !px6,y10! !px7,y10! !px8,y10! !px9,y10! !px10,y10! ^|
-echo ^| !px1,y9! !px2,y9! !px3,y9! !px4,y9! !px5,y9! !px6,y9! !px7,y9! !px8,y9! !px9,y9! !px10,y9! ^|
-echo ^| !px1,y8! !px2,y8! !px3,y8! !px4,y8! !px5,y8! !px6,y8! !px7,y8! !px8,y8! !px9,y8! !px10,y8! ^|
-echo ^| !px1,y7! !px2,y7! !px3,y7! !px4,y7! !px5,y7! !px6,y7! !px7,y7! !px8,y7! !px9,y7! !px10,y7! ^|
-echo ^| !px1,y6! !px2,y6! !px3,y6! !px4,y6! !px5,y6! !px6,y6! !px7,y6! !px8,y6! !px9,y6! !px10,y6! ^|
-echo ^| !px1,y5! !px2,y5! !px3,y5! !px4,y5! !px5,y5! !px6,y5! !px7,y5! !px8,y5! !px9,y5! !px10,y5! ^|
-echo ^| !px1,y4! !px2,y4! !px3,y4! !px4,y4! !px5,y4! !px6,y4! !px7,y4! !px8,y4! !px9,y4! !px10,y4! ^|
-echo ^| !px1,y3! !px2,y3! !px3,y3! !px4,y3! !px5,y3! !px6,y3! !px7,y3! !px8,y3! !px9,y3! !px10,y3! ^|
-echo ^| !px1,y2! !px2,y2! !px3,y2! !px4,y2! !px5,y2! !px6,y2! !px7,y2! !px8,y2! !px9,y2! !px10,y2! ^|
-echo ^| !px1,y1! !px2,y1! !px3,y1! !px4,y1! !px5,y1! !px6,y1! !px7,y1! !px8,y1! !px9,y1! !px10,y1! ^|
+echo __________________________________
+echo ^|                                ^|
+echo ^|  !px1,y10!  !px2,y10!  !px3,y10!  !px4,y10!  !px5,y10!  !px6,y10!  !px7,y10!  !px8,y10!  !px9,y10!  !px10,y10!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y9!  !px2,y9!  !px3,y9!  !px4,y9!  !px5,y9!  !px6,y9!  !px7,y9!  !px8,y9!  !px9,y9!  !px10,y9!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y8!  !px2,y8!  !px3,y8!  !px4,y8!  !px5,y8!  !px6,y8!  !px7,y8!  !px8,y8!  !px9,y8!  !px10,y8!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y7!  !px2,y7!  !px3,y7!  !px4,y7!  !px5,y7!  !px6,y7!  !px7,y7!  !px8,y7!  !px9,y7!  !px10,y7!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y6!  !px2,y6!  !px3,y6!  !px4,y6!  !px5,y6!  !px6,y6!  !px7,y6!  !px8,y6!  !px9,y6!  !px10,y6!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y5!  !px2,y5!  !px3,y5!  !px4,y5!  !px5,y5!  !px6,y5!  !px7,y5!  !px8,y5!  !px9,y5!  !px10,y5!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y4!  !px2,y4!  !px3,y4!  !px4,y4!  !px5,y4!  !px6,y4!  !px7,y4!  !px8,y4!  !px9,y4!  !px10,y4!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y3!  !px2,y3!  !px3,y3!  !px4,y3!  !px5,y3!  !px6,y3!  !px7,y3!  !px8,y3!  !px9,y3!  !px10,y3!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y2!  !px2,y2!  !px3,y2!  !px4,y2!  !px5,y2!  !px6,y2!  !px7,y2!  !px8,y2!  !px9,y2!  !px10,y2!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !px8,y1!  !px9,y1!  !px10,y1!  ^|
+echo ^|________________________________^|
 echo Points: %points%
 echo Player coordinates: (x=%playerX%, y=%playerY%)
 echo. 
@@ -902,6 +913,7 @@ echo You are %Dist% blocks away from %tracking%.
 ::powershell $Hypotenuse = [math]::Sqrt(%AddedSidesSquared%); $ActDist = [math]::Round($Hypotenuse, 2); Write-Host "'You are'$ActDist' meters away from %tracking%. '" -NoNewLine
 echo. 
 choice /c wasdtnp /t 5 /d n >nul
+set move=no
 echo Loading...
 if %errorlevel%==6 goto update
 :: Builds space where player was
@@ -940,7 +952,6 @@ if %random:~-1,1% GEQ 5 set /a goldY=%playerY%+5+%random:~-1,1%
 if "!x%goldX%,y%goldY%!"=="" set x%goldX%,y%goldY%=$
 if "!x%goldX%,y%goldY%!"=="$" call :saveGold
 )
-set move=no
 if %errorlevel%==1 (
 set /a playerY=%playerY%+1
 set move=forward
@@ -1042,25 +1053,106 @@ exit /b
 exit/b
 
 :forward
+cls
+echo. 
+echo __________________________________
+echo ^|                                ^|
+echo ^|                                ^|
+echo ^|  !px1,y10!  !px2,y10!  !px3,y10!  !px4,y10!  !px5,y10!  !px6,y10!  !px7,y10!  !px8,y10!  !px9,y10!  !px10,y10!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y9!  !px2,y9!  !px3,y9!  !px4,y9!  !px5,y9!  !px6,y9!  !px7,y9!  !px8,y9!  !px9,y9!  !px10,y9!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y8!  !px2,y8!  !px3,y8!  !px4,y8!  !px5,y8!  !px6,y8!  !px7,y8!  !px8,y8!  !px9,y8!  !px10,y8!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y7!  !px2,y7!  !px3,y7!  !px4,y7!  !px5,y7!  !px6,y7!  !px7,y7!  !px8,y7!  !px9,y7!  !px10,y7!  ^|
+echo ^|           !px4,y6!  !px5,y6!  !px6,y6!              ^|
+echo ^|  !px1,y6!  !px2,y6!  !px3,y6!           !px7,y6!  !px8,y6!  !px9,y6!  !px10,y6!  ^|
+echo ^|           !px4,y5!  !px5,y5!  !px6,y5!              ^|
+echo ^|  !px1,y5!  !px2,y5!  !px3,y5!           !px7,y5!  !px8,y5!  !px9,y5!  !px10,y5!  ^|
+echo ^|           !px4,y4!  !px5,y4!  !px6,y4!              ^|
+echo ^|  !px1,y4!  !px2,y4!  !px3,y4!           !px7,y4!  !px8,y4!  !px9,y4!  !px10,y4!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y3!  !px2,y3!  !px3,y3!  !px4,y3!  !px5,y3!  !px6,y3!  !px7,y3!  !px8,y3!  !px9,y3!  !px10,y3!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y2!  !px2,y2!  !px3,y2!  !px4,y2!  !px5,y2!  !px6,y2!  !px7,y2!  !px8,y2!  !px9,y2!  !px10,y2!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !px8,y1!  !px9,y1!  !px10,y1!  ^|
+echo Points: %points%
+echo Player coordinates: (x=%playerX%, y=%playerY%)
+echo. 
+echo. 
+echo Press P to track another player.
+echo Tracking: %tracking%
+echo %tracking% X=%trackedPX%, Y=%trackedPY%
+echo %tracking% has %trackedPt% points.
+echo You are %Dist% blocks away from %tracking%.
+echo. 
+echo Loading...
 exit/b
 
 :backward
+cls
+echo. 
+echo __________________________________
+echo ^|  !px1,y10!  !px2,y10!  !px3,y10!  !px4,y10!  !px5,y10!  !px6,y10!  !px7,y10!  !px8,y10!  !px9,y10!  !px10,y10!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y9!  !px2,y9!  !px3,y9!  !px4,y9!  !px5,y9!  !px6,y9!  !px7,y9!  !px8,y9!  !px9,y9!  !px10,y9!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y8!  !px2,y8!  !px3,y8!  !px4,y8!  !px5,y8!  !px6,y8!  !px7,y8!  !px8,y8!  !px9,y8!  !px10,y8!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y7!  !px2,y7!  !px3,y7!  !px4,y7!  !px5,y7!  !px6,y7!  !px7,y7!  !px8,y7!  !px9,y7!  !px10,y7!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y6!  !px2,y6!  !px3,y6!           !px7,y6!  !px8,y6!  !px9,y6!  !px10,y6!  ^|
+echo ^|           !px4,y6!  !px5,y6!  !px6,y6!              ^|
+echo ^|  !px1,y5!  !px2,y5!  !px3,y5!           !px7,y5!  !px8,y5!  !px9,y5!  !px10,y5!  ^|
+echo ^|           !px4,y5!  !px5,y5!  !px6,y5!              ^|
+echo ^|  !px1,y4!  !px2,y4!  !px3,y4!           !px7,y4!  !px8,y4!  !px9,y4!  !px10,y4!  ^|
+echo ^|           !px4,y4!  !px5,y4!  !px6,y4!              ^|
+echo ^|  !px1,y3!  !px2,y3!  !px3,y3!  !px4,y3!  !px5,y3!  !px6,y3!  !px7,y3!  !px8,y3!  !px9,y3!  !px10,y3!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y2!  !px2,y2!  !px3,y2!  !px4,y2!  !px5,y2!  !px6,y2!  !px7,y2!  !px8,y2!  !px9,y2!  !px10,y2!  ^|
+echo ^|                                ^|
+echo ^|  !px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !px8,y1!  !px9,y1!  !px10,y1!  ^|
+echo ^|                                ^|
+echo ^|________________________________^|
+echo Points: %points%
+echo Player coordinates: (x=%playerX%, y=%playerY%)
+echo. 
+echo. 
+echo Press P to track another player.
+echo Tracking: %tracking%
+echo %tracking% X=%trackedPX%, Y=%trackedPY%
+echo %tracking% has %trackedPt% points.
+echo You are %Dist% blocks away from %tracking%.
+echo. 
+echo Loading...
 exit/b
 
 :right
 cls
 echo. 
-echo _______________________
-echo ^|!px1,y10! !px2,y10! !px3,y10! !px4,y10! !px5,y10! !px6,y10! !px7,y10! !px8,y10! !px9,y10! !px10,y10!  ^|
-echo ^|!px1,y9! !px2,y9! !px3,y9! !px4,y9! !px5,y9! !px6,y9! !px7,y9! !px8,y9! !px9,y9! !px10,y9!  ^|
-echo ^|!px1,y8! !px2,y8! !px3,y8! !px4,y8! !px5,y8! !px6,y8! !px7,y8! !px8,y8! !px9,y8! !px10,y8!  ^|
-echo ^|!px1,y7! !px2,y7! !px3,y7! !px4,y7! !px5,y7! !px6,y7! !px7,y7! !px8,y7! !px9,y7! !px10,y7!  ^|
-echo ^|!px1,y6! !px2,y6! !px3,y6!  !px4,y6! !px5,y6! !px6,y6!!px7,y6! !px8,y6! !px9,y6! !px10,y6!  ^|
-echo ^|!px1,y5! !px2,y5! !px3,y5!  !px4,y5! !px5,y5! !px6,y5!!px7,y5! !px8,y5! !px9,y5! !px10,y5!  ^|
-echo ^|!px1,y4! !px2,y4! !px3,y4!  !px4,y4! !px5,y4! !px6,y4!!px7,y4! !px8,y4! !px9,y4! !px10,y4!  ^|
-echo ^|!px1,y3! !px2,y3! !px3,y3! !px4,y3! !px5,y3! !px6,y3! !px7,y3! !px8,y3! !px9,y3! !px10,y3!  ^|
-echo ^|!px1,y2! !px2,y2! !px3,y2! !px4,y2! !px5,y2! !px6,y2! !px7,y2! !px8,y2! !px9,y2! !px10,y2!  ^|
-echo ^|!px1,y1! !px2,y1! !px3,y1! !px4,y1! !px5,y1! !px6,y1! !px7,y1! !px8,y1! !px9,y1! !px10,y1!  ^|
+echo __________________________________
+echo ^|                                ^|
+echo ^|!px1,y10!  !px2,y10!  !px3,y10!  !px4,y10!  !px5,y10!  !px6,y10!  !px7,y10!  !px8,y10!  !px9,y10!  !px10,y10!    ^|
+echo ^|                                ^|
+echo ^|!px1,y9!  !px2,y9!  !px3,y9!  !px4,y9!  !px5,y9!  !px6,y9!  !px7,y9!  !px8,y9!  !px9,y9!  !px10,y9!    ^|
+echo ^|                                ^|
+echo ^|!px1,y8!  !px2,y8!  !px3,y8!  !px4,y8!  !px5,y8!  !px6,y8!  !px7,y8!  !px8,y8!  !px9,y8!  !px10,y8!    ^|
+echo ^|                                ^|
+echo ^|!px1,y7!  !px2,y7!  !px3,y7!  !px4,y7!  !px5,y7!  !px6,y7!  !px7,y7!  !px8,y7!  !px9,y7!  !px10,y7!    ^|
+echo ^|                                ^|
+echo ^|!px1,y6!  !px2,y6!  !px3,y6!    !px4,y6!  !px5,y6!  !px6,y6!!px7,y6!  !px8,y6!  !px9,y6!  !px10,y6!    ^|
+echo ^|                                ^|
+echo ^|!px1,y5!  !px2,y5!  !px3,y5!    !px4,y5!  !px5,y5!  !px6,y5!!px7,y5!  !px8,y5!  !px9,y5!  !px10,y5!    ^|
+echo ^|                                ^|
+echo ^|!px1,y4!  !px2,y4!  !px3,y4!    !px4,y4!  !px5,y4!  !px6,y4!!px7,y4!  !px8,y4!  !px9,y4!  !px10,y4!    ^|
+echo ^|                                ^|
+echo ^|!px1,y3!  !px2,y3!  !px3,y3!  !px4,y3!  !px5,y3!  !px6,y3!  !px7,y3!  !px8,y3!  !px9,y3!  !px10,y3!    ^|
+echo ^|                                ^|
+echo ^|!px1,y2!  !px2,y2!  !px3,y2!  !px4,y2!  !px5,y2!  !px6,y2!  !px7,y2!  !px8,y2!  !px9,y2!  !px10,y2!    ^|
+echo ^|                                ^|
+echo ^|!px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !px8,y1!  !px9,y1!  !px10,y1!    ^|
+echo ^|________________________________^|
 echo Points: %points%
 echo Player coordinates: (x=%playerX%, y=%playerY%)
 echo. 
@@ -1077,17 +1169,28 @@ exit /b
 :left
 cls
 echo. 
-echo _______________________
-echo ^|  !px1,y10! !px2,y10! !px3,y10! !px4,y10! !px5,y10! !px6,y10! !px7,y10! !px8,y10! !px9,y10! !px10,y10!^|
-echo ^|  !px1,y9! !px2,y9! !px3,y9! !px4,y9! !px5,y9! !px6,y9! !px7,y9! !px8,y9! !px9,y9! !px10,y9!^|
-echo ^|  !px1,y8! !px2,y8! !px3,y8! !px4,y8! !px5,y8! !px6,y8! !px7,y8! !px8,y8! !px9,y8! !px10,y8!^|
-echo ^|  !px1,y7! !px2,y7! !px3,y7! !px4,y7! !px5,y7! !px6,y7! !px7,y7! !px8,y7! !px9,y7! !px10,y7!^|
-echo ^|  !px1,y6! !px2,y6! !px3,y6!!px4,y6! !px5,y6! !px6,y6!  !px7,y6! !px8,y6! !px9,y6! !px10,y6!^|
-echo ^|  !px1,y5! !px2,y5! !px3,y5!!px4,y5! !px5,y5! !px6,y5!  !px7,y5! !px8,y5! !px9,y5! !px10,y5!^|
-echo ^|  !px1,y4! !px2,y4! !px3,y4!!px4,y4! !px5,y4! !px6,y4!  !px7,y4! !px8,y4! !px9,y4! !px10,y4!^|
-echo ^|  !px1,y3! !px2,y3! !px3,y3! !px4,y3! !px5,y3! !px6,y3! !px7,y3! !px8,y3! !px9,y3! !px10,y3!^|
-echo ^|  !px1,y2! !px2,y2! !px3,y2! !px4,y2! !px5,y2! !px6,y2! !px7,y2! !px8,y2! !px9,y2! !px10,y2!^|
-echo ^|  !px1,y1! !px2,y1! !px3,y1! !px4,y1! !px5,y1! !px6,y1! !px7,y1! !px8,y1! !px9,y1! !px10,y1!^|
+echo __________________________________
+echo ^|                                ^|
+echo ^|    !px1,y10!  !px2,y10!  !px3,y10!  !px4,y10!  !px5,y10!  !px6,y10!  !px7,y10!  !px8,y10!  !px9,y10!  !px10,y10!^|
+echo ^|                                ^|
+echo ^|    !px1,y9!  !px2,y9!  !px3,y9!  !px4,y9!  !px5,y9!  !px6,y9!  !px7,y9!  !px8,y9!  !px9,y9!  !px10,y9!^|
+echo ^|                                ^|
+echo ^|    !px1,y8!  !px2,y8!  !px3,y8!  !px4,y8!  !px5,y8!  !px6,y8!  !px7,y8!  !px8,y8!  !px9,y8!  !px10,y8!^|
+echo ^|                                ^|
+echo ^|    !px1,y7!  !px2,y7!  !px3,y7!  !px4,y7!  !px5,y7!  !px6,y7!  !px7,y7!  !px8,y7!  !px9,y7!  !px10,y7!^|
+echo ^|                                ^|
+echo ^|    !px1,y6!  !px2,y6!  !px3,y6!!px4,y6!  !px5,y6!  !px6,y6!    !px7,y6!  !px8,y6!  !px9,y6!  !px10,y6!^|
+echo ^|                                ^|
+echo ^|    !px1,y5!  !px2,y5!  !px3,y5!!px4,y5!  !px5,y5!  !px6,y5!    !px7,y5!  !px8,y5!  !px9,y5!  !px10,y5!^|
+echo ^|                                ^|
+echo ^|    !px1,y4!  !px2,y4!  !px3,y4!!px4,y4!  !px5,y4!  !px6,y4!    !px7,y4!  !px8,y4!  !px9,y4!  !px10,y4!^|
+echo ^|                                ^|
+echo ^|    !px1,y3!  !px2,y3!  !px3,y3!  !px4,y3!  !px5,y3!  !px6,y3!  !px7,y3!  !px8,y3!  !px9,y3!  !px10,y3!^|
+echo ^|                                ^|
+echo ^|    !px1,y2!  !px2,y2!  !px3,y2!  !px4,y2!  !px5,y2!  !px6,y2!  !px7,y2!  !px8,y2!  !px9,y2!  !px10,y2!^|
+echo ^|                                ^|
+echo ^|    !px1,y1!  !px2,y1!  !px3,y1!  !px4,y1!  !px5,y1!  !px6,y1!  !px7,y1!  !px8,y1!  !px9,y1!  !px10,y1!^|
+echo ^|________________________________^|
 echo Points: %points%
 echo Player coordinates: (x=%playerX%, y=%playerY%)
 echo. 
@@ -1097,6 +1200,6 @@ echo Tracking: %tracking%
 echo %tracking% X=%trackedPX%, Y=%trackedPY%
 echo %tracking% has %trackedPt% points.
 echo You are %Dist% blocks away from %tracking%.
-echo.
+echo. 
 echo Loading...
 exit /b
