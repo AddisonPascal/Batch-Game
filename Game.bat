@@ -14,7 +14,7 @@ set tracking=spawn
 set seenChar=.
 set name=tmp_undefined
 setlocal enabledelayedexpansion
-set version=0.0.0
+set version=1.0.0
 title Batch Game
 cls
 set/p name="Username: "
